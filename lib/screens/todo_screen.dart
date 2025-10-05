@@ -28,14 +28,11 @@ class _TodoScreenState extends State<TodoScreen> {
     });
   }
 
-
   // Task Dialog code are start here
   void _showTaskDialog({int? index}) {
-
     TextEditingController _taskController = TextEditingController(
-      text: index != null ? tasks[index]['task'] : ''
+      text: index != null ? tasks[index]['task'] : '',
     );
-
 
     // Show Dialog Related work are start here
     showDialog(
@@ -43,7 +40,7 @@ class _TodoScreenState extends State<TodoScreen> {
       builder: (context) => AlertDialog(
         backgroundColor: Colors.blue.shade50,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-        title: Text( index != null ? 'Edit Task' : 'Add Task'),
+        title: Text(index != null ? 'Edit Task' : 'Add Task'),
         content: TextField(
           decoration: InputDecoration(hintText: 'Enter Task'),
           controller: _taskController,
@@ -54,16 +51,16 @@ class _TodoScreenState extends State<TodoScreen> {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text( 'Cancel'),
+            child: Text('Cancel'),
           ),
 
           // save task Button
           ElevatedButton(
             onPressed: () {
               if (_taskController.text.trim().isNotEmpty) {
-                if( index != null){
+                if (index != null) {
                   _editTask(index, _taskController.text);
-                }else{
+                } else {
                   _addTask(_taskController.text);
                 }
               }
@@ -100,6 +97,7 @@ class _TodoScreenState extends State<TodoScreen> {
   @override
   Widget build(BuildContext context) {
     // Task Filter Related Work are here
+
     List<Map<String, dynamic>> filtedTask = tasks
         .where((task) => task['completed'] != showActiveTask)
         .toList();
@@ -240,14 +238,12 @@ class _TodoScreenState extends State<TodoScreen> {
                         ),
                         // Check box related work are here
                         leading: Checkbox(
-                            shape: CircleBorder(),
-                            value: filtedTask[index]['completed'],
-                            onChanged: (value) => toggleTaskStatus(index),
-
+                          shape: CircleBorder(),
+                          value: filtedTask[index]['completed'],
+                          onChanged: (value) => toggleTaskStatus(index),
                         ),
                         // Edit related work are here
                         trailing: IconButton(
-
                           onPressed: () => _showTaskDialog(index: index),
                           icon: Icon(Icons.edit),
                         ),
